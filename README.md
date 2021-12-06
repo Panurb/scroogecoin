@@ -12,4 +12,5 @@ The program will print
 * the longest downturn,
 * the highest trading volume and date,
 * the best buy and sell dates
-for the given date range
+
+for the given date range.

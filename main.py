@@ -11,7 +11,7 @@ import matplotlib.dates as mdates
 from pycoingecko import CoinGeckoAPI
 
 
-def date_to_unix(str, hours=0):
+def iso_to_unix(str, hours=0):
     date = datetime.fromisoformat(str) + timedelta(hours=hours)
     return int(calendar.timegm(date.timetuple()))
     
@@ -51,7 +51,7 @@ def longest_downturn(prices):
         else:
             days = 0
             
-    # Include the start date
+    # Include the start date in the downturn
     if (max_days > 0):
         max_days += 1
 
@@ -103,8 +103,8 @@ def main():
     args = parser.parse_args()
     
     try:
-        from_date = date_to_unix(args.start)
-        to_date = date_to_unix(args.end, 1)
+        from_date = iso_to_unix(args.start)
+        to_date = iso_to_unix(args.end, 1)
     except ValueError:
         parser.error('invalid date')
     
@@ -112,9 +112,9 @@ def main():
         
     print(f'Longest downturn: {longest_downturn(prices)} days')
     date, volume = highest_volume(dates, volumes)
-    print(f'Highest trading volume: {volume:,.2f} on {date}')
+    print(f'Highest trading volume: {volume:,.2f} EUR on {date}')
     buy_date, sell_date = best_buy_sell_dates(dates, prices)
-    print(f'Best buy date: {buy_date}, sell date {sell_date}')
+    print(f'Best buy date: {buy_date}, sell date: {sell_date}')
     
     if args.plot:
         plot_values(dates, prices)
