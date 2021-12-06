@@ -85,6 +85,7 @@ def best_buy_sell_dates(dates, prices):
     return '-', '-'
     
     
+# For testing purposes
 def plot_values(dates, values):
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
